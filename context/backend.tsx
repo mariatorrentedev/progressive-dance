@@ -1,13 +1,13 @@
-import type { Context, PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import type { BackendEnvironment } from "./types";
 import * as React from "react";
 import { api } from "../convex/_generated/api";
 import { useMutation } from "convex/react";
 import { useAuth0 } from "@auth0/auth0-react";
 
-export const BackendContext = React.createContext(
+export const BackendContext = React.createContext<BackendEnvironment | null>(
   null
-) as Context<BackendEnvironment | null>;
+);
 
 export default function BackendProvider({ children }: PropsWithChildren) {
   const { loginWithRedirect: login, logout: auth0Logout } = useAuth0();
