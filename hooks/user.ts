@@ -1,3 +1,4 @@
+"use-client";
 import * as React from "react";
 import { useConvexAuth } from "convex/react";
 import { BackendContext } from "../context/backend";
