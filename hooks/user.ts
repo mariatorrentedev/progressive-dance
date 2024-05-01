@@ -1,3 +1,4 @@
+"use-client";
 import * as React from "react";
 import { useConvexAuth } from "convex/react";
 import { BackendContext } from "../context/backend";
@@ -8,8 +9,8 @@ export default function useUserData() {
   const backend = React.useContext<BackendEnvironment | null>(BackendContext);
   const { isLoading: isAuthLoading, isAuthenticated } = useConvexAuth();
 
-  // Get the currently authenticated user.
-  const [user, setUser] = React.useState<User | null>();
+  // Set the currently authenticated user.
+  const [user, setUser] = React.useState<User | null>(null);
 
   React.useEffect(() => {
     if (isAuthLoading) return;
@@ -21,7 +22,7 @@ export default function useUserData() {
     }
     if (isAuthenticated) {
       createOrUpdateUser()
-        .then((savedUser) => setUser(savedUser as User))
+        .then((savedUser) => setUser(savedUser))
         .catch(console.error);
     } else {
       setUser(null);

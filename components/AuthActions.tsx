@@ -1,5 +1,6 @@
 import type { BackendEnvironment, User, AppData } from "../context/types";
 import * as React from "react";
+import { Button, CircularProgress } from "@mui/material";
 import NextError from "next/error";
 import Image from "next/image";
 import { BackendContext } from "../context/backend";
@@ -19,20 +20,24 @@ function LogoutButton() {
     );
   }
 
-  return <button onClick={auth.logout}>Log out</button>;
+  return (
+    <Button variant="contained" onClick={auth.logout}>
+      Log out
+    </Button>
+  );
 }
 
 function LoginButton() {
   const backend = React.useContext<BackendEnvironment | null>(BackendContext);
   const app = React.useContext<AppData | null>(DataContext);
   return (
-    <button
-      title="Log in"
+    <Button
+      variant="contained"
       disabled={app?.user.isLoading}
       onClick={backend?.authentication?.login}
     >
       Log in
-    </button>
+    </Button>
   );
 }
 
@@ -102,7 +107,7 @@ export function Login() {
       )}
       {!user ? (
         data?.user.isLoading ? (
-          <p>Loading...</p>
+          <CircularProgress />
         ) : (
           <LoginButton />
         )
