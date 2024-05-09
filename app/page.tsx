@@ -1,16 +1,10 @@
 "use client";
-import BackendProvider from "../context/backend";
-import { Header } from "../components/Header";
-import DataProvider from "../context/data";
+import { Typography } from "@mui/material";
 
 function MyApp() {
   return (
     <main>
-      <BackendProvider>
-        <DataProvider>
-          <Header />
-        </DataProvider>
-      </BackendProvider>
+      <Typography>Welcome!</Typography>
     </main>
   );
 }
