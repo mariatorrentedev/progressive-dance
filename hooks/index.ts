@@ -1,2 +1,2 @@
 export { default as useUserData } from "./user";
-export { default as useNextAuth0Provider } from "./next-auth-provider";
+export { default as useNextAuth0Provider } from "./next-auth0-provider";
