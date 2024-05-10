@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Button, CircularProgress } from "@mui/material";
+import { Button } from "@mui/material";
 import Image from "next/image";
 
 export function Logout() {
@@ -22,12 +22,13 @@ export function SingUp() {
   return <Button href="/api/auth/signup">Sign Up</Button>;
 }
 
+// TODO: move and refactor when implementing the UI.
 export function Avatar({
   user,
   size = 30,
   withName = false,
 }: {
-  user: User;
+  user: any;
   size?: number;
   withName?: boolean;
 }) {

@@ -1,7 +1,4 @@
 import * as React from "react";
-import { getAccessToken, getSession } from "@auth0/nextjs-auth0";
-import { useUser } from "@auth0/nextjs-auth0/client";
-
 /**
  * Since there is no integration using the `next/auth0` as with `react/auth0`,
  * we will need to provide the state of our Authentication with convex.
@@ -9,27 +6,44 @@ import { useUser } from "@auth0/nextjs-auth0/client";
  * See @https://docs.convex.dev/auth/advanced/custom-auth
  *
  */
-export default async function useNextAuth0Provider() {
-  const { user } = await getAccessToken();
+export default function useNextAuth0Provider() {
+  const [isLoading, setIsLoading] = React.useState(false);
 
-  const fetchAccessToken = React.useCallback(
+  const fetchAccessToken: ({
+    forceRefreshToken,
+  }: {
+    forceRefreshToken: boolean;
+  }) => Promise<string | null> = React.useCallback(
     async ({ forceRefreshToken }: { forceRefreshToken: boolean }) => {
-      return await getAccessToken({
-        refresh: forceRefreshToken,
-      });
-    },
-    [getAccessToken]
-  );
+      setIsLoading(true);
+      try {
+        const response = await fetch("/api/session", {
+          method: "GET",
+          cache: forceRefreshToken ? "force-cache" : "default",
+        });
+        const data = await response.json();
 
-  console.log(user, fetchAccessToken);
+        if (response.ok) {
+          return data.idToken;
+        } else {
+          return null;
+        }
+      } catch (error) {
+        console.error(error);
+        return null;
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    []
+  );
 
   return React.useMemo(
     () => ({
-      isLoading: !user,
-      isAuthenticated: user ?? false,
-      // The async function to fetch the ID token
+      isLoading,
+      isAuthenticated: !!fetchAccessToken,
       fetchAccessToken,
     }),
-    [user, fetchAccessToken]
+    [fetchAccessToken]
   );
 }

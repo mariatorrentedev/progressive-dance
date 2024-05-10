@@ -1,27 +1,31 @@
-import type { PropsWithChildren } from "react";
 import Link from "next/link";
 import * as Auth from "./Auth";
+import { Stack } from "@mui/material";
 import { useUser } from "@auth0/nextjs-auth0/client";
 
-export function Header({ children }: PropsWithChildren) {
+//TODO: refactor when implementing UI.
+export function Header() {
   const { user } = useUser();
   return (
-    <header>
+    <Stack
+      component="header"
+      justifyContent="space-between"
+      direction="row"
+      alignItems="center"
+      margin={1}
+    >
       <Link href="/">
         <h1>Home</h1>
       </Link>
 
-      {!user && (
-        <>
+      {!user ? (
+        <div>
           <Auth.SingUp />
           <Auth.Login />
-        </>
+        </div>
+      ) : (
+        <Auth.Logout />
       )}
-      {user && (
-        <>
-          <Auth.Logout />
-        </>
-      )}
-    </header>
+    </Stack>
   );
 }
