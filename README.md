@@ -18,7 +18,7 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## [🔗 App Router](https://nextjs.org/docs/app/building-your-application/routing#the-app-router)
+## [App Router](https://nextjs.org/docs/app/building-your-application/routing#the-app-router)
 
 ### Nice To Know:
 
@@ -31,6 +31,8 @@ This application uses the auth0/nextjs SDK which automatically connects with our
 
 On top of that we are saving, and using our users from the [Convex](https://stack.convex.dev/how-convex-works) provider, a lightweight backend solution that allow us to connect clients to the sync worker, which delegates running Js to the runner, that then queries the DB layer. Some customization in the auth integration was needed, since the `auth0/nextjs` does not provided the same out-of-the-box solution as `auth0/react` with the `Auth0Provider` HOC component, so we needed to create a hook to provide the state of our `idToken` to convex.
 
+See [here](https://auth0.com/blog/id-token-access-token-what-is-the-difference/) difference between `idToken` and `accessToken`.
+
 ### Steps:
 
 #### auth0/nextjs-auth0
@@ -38,17 +40,17 @@ On top of that we are saving, and using our users from the [Convex](https://stac
 This library requires Node.js 16 LTS and newer LTS versions.
 
 1. Create a new Auth0 application [here](https://manage.auth0.com/#/applications).
-2. Follow the steps here using the [App Router](https://github.com/auth0/nextjs-auth0/tree/main?tab=readme-ov-file#app-router). If you want a deeper insight on the implementation, follow the tutorial [Here](https://developer.auth0.com/resources/guides/web-app/nextjs/basic-authentication).
+2. Follow the steps here using the [App Router](https://github.com/auth0/nextjs-auth0/tree/main?tab=readme-ov-file#app-router). If you want a deeper insight on the implementation, follow the tutorial [here](https://developer.auth0.com/resources/guides/web-app/nextjs/basic-authentication).
 
 Awesome, we have our Basic Authentication done, let's integrate with our backend to save the users...
 
 #### convex [custom auth](https://docs.convex.dev/auth/advanced/custom-auth)
 
-4. Follow the steps [here](https://docs.convex.dev/auth/advanced/custom-auth) for the basic set up.
-5. Create a custom hook to provide the status of our Auth0rization with Convex. See `/hooks/next-auth0-provider` for an example.
-6. Create another custom hook to use the new authentication state, and the user the was passed to the HOC above. See `/hooks/user`.
-
-7. Test that you can save, and consume correctly a user.
+3. Follow the steps [here](https://docs.convex.dev/auth/advanced/custom-auth) for the basic set up.
+4. Create a custom hook to provide the status of our auth0entication with Convex. See `/hooks/next-auth0-provider` for an example.
+5. Use the newly created hook and pass it to the `ConvexProviderWithAuth` HOC. See `/app/ConvexProvider.tsx`.
+6. Create another custom hook to use the new authentication state and user passed to the HOC above. See `/hooks/user`.
+7. Test that you can save, and consume a user correctly.
 
 ## Deploy on Vercel
 
