@@ -4,6 +4,8 @@ Because every new learning feels like a progressive dance 💃🏽!
 
 ## Simple App using [Next.js](https://nextjs.org/), [Auth0](https://auth0.com/) and [Convex](https://convex.dev)
 
+## Next.js
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 First, run the development server:
@@ -14,9 +16,19 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Convex
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### [Behind the convex reactor: real time is all the time!](https://stack.convex.dev/how-convex-works)
+
+Follow the quickstart tutorial [here](https://docs.convex.dev/quickstart/nextjs).
+
+```bash
+npx convex dev
+```
+
+**_Is Convex a relational or NoSQL DB?_** Both, read [Document ID's: References and Relationships](https://docs.convex.dev/database/document-ids#references-and-relationships).
+
+I recommend you to follow [this](https://docs.convex.dev/tutorial/reactor) tutorial to get a better idea of how convex works.
 
 ## [App Router](https://nextjs.org/docs/app/building-your-application/routing#the-app-router)
 
