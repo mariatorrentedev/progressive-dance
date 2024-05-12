@@ -1,6 +1,10 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
+  // See @https://nextjs.org/docs/architecture/nextjs-compiler
+  compiler: {
+    styledComponents: true,
+  },
   images: {
     dangerouslyAllowSVG: true,
     remotePatterns: [
